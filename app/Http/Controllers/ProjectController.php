@@ -42,11 +42,18 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+        $totalTime = $project->getTotalTime();
+        $totalTimeHours = 0;
+        if ($totalTime >= 60) {
+            $totalTimeHours = floor($totalTime / 60);
+            $totalTime = $totalTime % 60;
+        }
         if (Auth::user()->id === $project->user_id) {
             return view('project.show', [
                 'project' => $project,
                 'logs' => $project->logs()->get()->sortByDesc('created_at'),
-                'totalTime' => $project->getTotalTime(),
+                'totalTime' => $totalTime,
+                'totalTimeHours' => $totalTimeHours,
             ]);
         }
         return redirect()->route('projects.index')->with('error', 'You are not authorized to view this project');
