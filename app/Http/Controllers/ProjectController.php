@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -13,7 +14,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        return view('project.index', [
+            'projects' => Auth::user()->projects()->get(),
+        ]);
     }
 
     /**
@@ -21,7 +24,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('project.create');
     }
 
     /**
@@ -29,7 +32,9 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        Auth::user()->projects()->create($request->validated());
+
+        return redirect()->route('projects.index')->with('success', 'Project created successfully');
     }
 
     /**
@@ -45,7 +50,12 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        if (Auth::user()->id === $project->user_id) {
+            return view('project.create', [
+                'project' => $project,
+            ]);
+        }
+        return redirect()->route('projects.index')->with('error', 'You are not authorized to edit this project');
     }
 
     /**
@@ -53,7 +63,11 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        if (Auth::user()->id === $project->user_id) {
+            $project->update($request->validated());
+            return redirect()->route('projects.index')->with('success', 'Project updated successfully');
+        }
+        return redirect()->route('projects.index')->with('error', 'You are not authorized to update this project');
     }
 
     /**
@@ -61,6 +75,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        if (Auth::user()->id === $project->user_id) {
+            $project->delete();
+            return redirect()->route('projects.index')->with('success', 'Project deleted successfully');
+        }
+        return redirect()->route('projects.index')->with('error', 'You are not authorized to delete this project');
     }
 }

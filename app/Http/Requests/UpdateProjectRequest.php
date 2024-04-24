@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateProjectRequest extends FormRequest
 {
@@ -11,6 +12,9 @@ class UpdateProjectRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        if (Auth::check() && Auth::user()->id === $this->project->user_id) {
+            return true;
+        }
         return false;
     }
 
@@ -22,7 +26,7 @@ class UpdateProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'string', 'max:255'],
         ];
     }
 }
