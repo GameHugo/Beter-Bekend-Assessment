@@ -12,15 +12,25 @@
             @if(session('error'))
                 <p class="mt-4 bg-red-200 text-red-800 p-4">{{ session('error') }}</p>
             @endif
-            <form action="{{ route('projects.logs.store', $project) }}" method="post">
+            <form action="{{ route('projects.logs.store', $project) }}" method="post"
+                  class="mt-4 w-1/4 flex flex-col items-center">
                 @csrf
                 <div class="bg-white shadow-md p-4 mt-4 flex flex-col gap-2 justify-between items-center w-full">
-                    <div>
+                    <div class="w-full">
                         <p class="text-xl font-bold">Create log</p>
-                        <input type="text" name="name" placeholder="Name" class="mt-4 p-2 w-full border border-gray-300 rounded-md">
-                        <input type="number" name="minutes" placeholder="Minutes" class="mt-4 p-2 w-full border border-gray-300 rounded-md">
+                        <input type="text" name="name" placeholder="Name" required
+                               class="mt-4 p-2 w-full border border-gray-300 rounded-md">
+                        @error('name')
+                        <p class="text-red-500">{{ $message }}</p>
+                        @enderror
+                        <input type="number" name="minutes" placeholder="Minutes" required
+                               class="mt-4 p-2 w-full border border-gray-300 rounded-md">
+                        @error('minutes')
+                        <p class="text-red-500">{{ $message }}</p>
+                        @enderror
                     </div>
-                    <button type="submit" class="block bg-blue-500 hover:bg-blue-600 transition text-white p-3 rounded-md">
+                    <button type="submit"
+                            class="block bg-blue-500 hover:bg-blue-600 transition text-white p-3 rounded-md">
                         Create log
                     </button>
                 </div>

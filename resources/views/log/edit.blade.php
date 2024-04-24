@@ -14,10 +14,16 @@
                     <input type="text" name="name" id="name" value="{{ $log->name }}"
                            required placeholder="Name" class="mt-4 p-2 w-full border border-gray-300 rounded-md">
                 </div>
+                @error('name')
+                <p class="text-red-500">{{ $message }}</p>
+                @enderror
                 <div>
                     <input type="number" name="minutes" id="minutes" value="{{ $log->minutes }}"
                            required placeholder="Minutes" class="mt-4 p-2 w-full border border-gray-300 rounded-md">
                 </div>
+                @error('minutes')
+                <p class="text-red-500">{{ $message }}</p>
+                @enderror
                 <button type="submit" class="mt-4 bg-blue-500 text-white p-4 rounded-md">Edit log</button>
             </form>
         </div>
