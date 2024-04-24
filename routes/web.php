@@ -41,11 +41,13 @@ Route::group(['middleware' => 'auth'], function () {
             $totalTimeHours = floor($totalTime / 60);
             $totalTime = $totalTime % 60;
         }
+        $logs = Auth::user()->logs()->orderBy('created_at', 'desc')->limit(5)->get();
         return view('dashboard.dashboard', [
             'totalProjects' => Auth::user()->projects()->count(),
             'totalLogs' => $totalLogs,
             'totalTime' => $totalTime,
             'totalTimeHours' => $totalTimeHours,
+            'logs' => $logs,
         ]);
     })->name('dashboard');
 });
