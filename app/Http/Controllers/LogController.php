@@ -10,22 +10,6 @@ use App\Models\Project;
 class LogController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Project $project, StoreLogRequest $request)
@@ -35,14 +19,6 @@ class LogController extends Controller
             return redirect()->route('projects.show', $project)->with('success', 'Log created successfully');
         }
         return redirect()->route('projects.index')->with('error', 'You are not authorized to create a log for this project');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Log $log)
-    {
-        //
     }
 
     /**

@@ -13,7 +13,7 @@
                 <p class="mt-4 bg-red-200 text-red-800 p-4">{{ session('error') }}</p>
             @endif
             @if($projects->isEmpty())
-                <p class="mt-4 bg-red-200 text-red-800 p-4">No projects found</p>
+                <p class="mt-4 p-4">No projects found</p>
             @endif
             @foreach($projects as $project)
                 <div class="w-1/3 bg-white shadow-md p-4 mt-4 flex justify-between items-center">

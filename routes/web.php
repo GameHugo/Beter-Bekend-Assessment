@@ -15,17 +15,10 @@ Route::group(['middleware' => 'auth'], function () {
         return redirect('/');
     })->name('logout');
 
-    Route::resource('projects', ProjectController::class)
-        ->name('index', 'projects.index')
-        ->name('show', 'projects.show')
-        ->name('create', 'projects.create');
+    Route::resource('projects', ProjectController::class);
 
     Route::resource('projects.logs', LogController::class)
-        ->name('index', 'projects.logs.index')
-        ->name('show', 'projects.logs.show')
-        ->name('update', 'projects.logs.update')
-        ->name('create', 'projects.logs.create');
-
+        ->except(['index', 'create', 'show']);
     Route::delete('/projects/{project}/logs', [LogController::class, 'destroyAll'])
         ->name('projects.logs.destroyAll');
 

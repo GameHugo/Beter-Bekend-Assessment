@@ -46,7 +46,7 @@
                     @endif
                     @foreach($logs as $log)
                         <tr class="border-b border-gray-300">
-                            <td class="py-2">{{ $log->project->name }}</td>
+                            <td class="py-2"><a href="{{ route('projects.show', $log->project) }}">{{ $log->project->name }}</a></td>
                             <td class="py-2">{{ $log->name }}</td>
                             <td class="py-2">{{ $log->minutes }} minutes</td>
                         </tr>
