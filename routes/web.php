@@ -27,6 +27,16 @@ Route::group(['middleware' => 'auth'], function () {
         ->name('create', 'projects.logs.create');
 
     Route::get('/dashboard', function () {
-        return view('dashboard.dashboard');
+        $totalLogs = 0;
+        $totalTime = 0;
+        foreach (Auth::user()->projects as $project) {
+            $totalLogs += $project->logs()->count();
+            $totalTime += $project->getTotalTime();
+        }
+        return view('dashboard.dashboard', [
+            'totalProjects' => Auth::user()->projects()->count(),
+            'totalLogs' => $totalLogs,
+            'totalTime' => $totalTime,
+        ]);
     })->name('dashboard');
 });
