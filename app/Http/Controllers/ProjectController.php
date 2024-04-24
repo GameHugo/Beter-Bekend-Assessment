@@ -42,7 +42,14 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        if (Auth::user()->id === $project->user_id) {
+            return view('project.show', [
+                'project' => $project,
+                'logs' => $project->logs()->get()->sortByDesc('created_at'),
+                'totalTime' => $project->getTotalTime(),
+            ]);
+        }
+        return redirect()->route('projects.index')->with('error', 'You are not authorized to view this project');
     }
 
     /**

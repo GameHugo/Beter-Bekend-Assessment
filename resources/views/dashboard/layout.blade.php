@@ -24,7 +24,7 @@
         </ul>
     </nav>
 </aside>
-<main class="w-5/6 h-screen bg-gray-100 float-end">
+<main class="w-5/6 min-h-screen pb-5 bg-gray-100 float-end">
     @yield('content')
 </main>
 </body>
