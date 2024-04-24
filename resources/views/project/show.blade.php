@@ -31,6 +31,16 @@
                         <p class="text-xl font-bold">Total time</p>
                         <p class="mt-4">{{ $totalTime }} minutes</p>
                     </div>
+                    <div>
+                        <form action="{{ route('projects.logs.destroyAll', $project) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                    class="block bg-red-500 hover:bg-red-600 transition text-white p-3 rounded-md">
+                                Delete all logs
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
             @foreach($logs as $log)

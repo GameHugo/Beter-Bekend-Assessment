@@ -82,4 +82,16 @@ class LogController extends Controller
         }
         return redirect()->route('projects.index')->with('error', 'You are not authorized to delete this log');
     }
+
+    /**
+     * Remove all logs from storage.
+     */
+    public function destroyAll(Project $project)
+    {
+        if ($project->user_id === auth()->id()) {
+            $project->logs()->delete();
+            return redirect()->route('projects.show', $project)->with('success', 'All logs deleted successfully');
+        }
+        return redirect()->route('projects.index')->with('error', 'You are not authorized to delete all logs');
+    }
 }

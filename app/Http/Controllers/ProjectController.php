@@ -83,6 +83,9 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         if (Auth::user()->id === $project->user_id) {
+            if ($project->logs()->count() > 0) {
+                return redirect()->route('projects.index')->with('error', 'Project has logs, please delete them first');
+            }
             $project->delete();
             return redirect()->route('projects.index')->with('success', 'Project deleted successfully');
         }

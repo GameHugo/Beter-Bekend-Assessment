@@ -26,6 +26,9 @@ Route::group(['middleware' => 'auth'], function () {
         ->name('update', 'projects.logs.update')
         ->name('create', 'projects.logs.create');
 
+    Route::delete('/projects/{project}/logs', [LogController::class, 'destroyAll'])
+        ->name('projects.logs.destroyAll');
+
     Route::get('/dashboard', function () {
         $totalLogs = 0;
         $totalTime = 0;
