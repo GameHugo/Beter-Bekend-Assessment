@@ -29,14 +29,20 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', function () {
         $totalLogs = 0;
         $totalTime = 0;
+        $totalTimeHours = 0;
         foreach (Auth::user()->projects as $project) {
             $totalLogs += $project->logs()->count();
             $totalTime += $project->getTotalTime();
+        }
+        if ($totalTime >= 60) {
+            $totalTimeHours = floor($totalTime / 60);
+            $totalTime = $totalTime % 60;
         }
         return view('dashboard.dashboard', [
             'totalProjects' => Auth::user()->projects()->count(),
             'totalLogs' => $totalLogs,
             'totalTime' => $totalTime,
+            'totalTimeHours' => $totalTimeHours,
         ]);
     })->name('dashboard');
 });

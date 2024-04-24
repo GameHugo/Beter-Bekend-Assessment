@@ -22,7 +22,8 @@
                 <div class="w-1/3 bg-white shadow-md p-4 mt-4 flex justify-between items-center">
                     <div>
                         <p class="text-xl font-bold">Total time</p>
-                        <p class="mt-4">{{ $totalTime }} minutes</p>
+                        <p class="mt-4">@if(isset($totalTimeHours) && $totalTimeHours > 0)
+                                {{ $totalTimeHours }} hours and @endif {{ $totalTime }} minutes</p>
                     </div>
                 </div>
             </div>

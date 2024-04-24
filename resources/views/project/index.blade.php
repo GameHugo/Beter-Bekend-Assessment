@@ -20,22 +20,26 @@
                     <div>
                         <a href="{{ route('projects.show', $project) }}"
                            class="text-xl font-bold">{{ $project->name }}</a>
-                        <a href="{{ route('projects.edit', $project) }}"
-                            class="mt-4 block">Edit project</a>
                     </div>
-                    <form action="{{ route('projects.destroy', $project) }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit"
-                                class="block bg-red-500 hover:bg-red-600 transition text-white p-3 rounded-md">
-                            Delete project
-                        </button>
-                    </form>
+                    <div class="flex gap-4">
+                        <a href="{{ route('projects.edit', $project) }}"
+                           class="block bg-blue-500 hover:bg-blue-600 transition text-white p-3 rounded-md">
+                            Edit project
+                        </a>
+                        <form action="{{ route('projects.destroy', $project) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                    class="block bg-red-500 hover:bg-red-600 transition text-white p-3 rounded-md">
+                                Delete project
+                            </button>
+                        </form>
+                    </div>
                 </div>
             @endforeach
 
             <a href="{{ route('projects.create') }}"
-               class="mt-4 block bg-blue-500 hover:bg-blue-600 transition text-white p-4 rounded-md">
+               class="mt-6 block bg-blue-500 hover:bg-blue-600 transition text-white p-4 rounded-md">
                 Create project
             </a>
         </div>

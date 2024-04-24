@@ -15,9 +15,8 @@
             @endif
                 @csrf
                 <div>
-                    <label for="name" class="block">Name</label>
                     <input type="text" name="name" id="name" @if(isset($project)) value="{{ $project->name }}" @endif
-                           class="w-full p-1 border border-gray-300 rounded-md" required>
+                        required placeholder="Name" class="mt-4 p-2 w-full border border-gray-300 rounded-md">
                 </div>
                     @if(isset($project))
                         <button type="submit" class="mt-4 bg-blue-500 text-white p-4 rounded-md">Edit project</button>

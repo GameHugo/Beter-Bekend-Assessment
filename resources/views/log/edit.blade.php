@@ -11,14 +11,12 @@
                 @method('PUT')
                 @csrf
                 <div>
-                    <label for="name" class="block">Name</label>
                     <input type="text" name="name" id="name" value="{{ $log->name }}"
-                           class="w-full p-1 border border-gray-300 rounded-md" required>
+                           required placeholder="Name" class="mt-4 p-2 w-full border border-gray-300 rounded-md">
                 </div>
                 <div>
-                    <label for="minutes" class="block mt-4">Minutes</label>
                     <input type="number" name="minutes" id="minutes" value="{{ $log->minutes }}"
-                           class="w-full p-1 border border-gray-300 rounded-md" required>
+                           required placeholder="Minutes" class="mt-4 p-2 w-full border border-gray-300 rounded-md">
                 </div>
                 <button type="submit" class="mt-4 bg-blue-500 text-white p-4 rounded-md">Edit log</button>
             </form>
